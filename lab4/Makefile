@@ -1,16 +1,10 @@
-CC=gcc
-CFLAGS=-c -Wall
-SOURCES=main.c algo.c archiver.c
-OBJECTS=$(SOURCES:.c=.o)
-EXECUTABLE=result
+all: compile run clean
 
-all: $(SOURCES) $(EXECUTABLE)
-	
-$(EXECUTABLE): $(OBJECTS) 
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+compile:
+	g++ main.cpp -std=c++17 -o main.o
 
-%.o: %.c
-	$(CC) $(CFLAGS) $< -o $@
+run: main.o
+	./main.o
 
 clean:
-	rm -rf *.o $(OBJECTS)
+	rm -rf *.o

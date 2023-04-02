@@ -1,22 +1,53 @@
-#include <stdio.h>
-#include <string.h>
-#include "algo.h"
+#include <iostream>
+#include <map>
+#include <string>
 
+using namespace std;
 
-int main(int argc, char **argv) {
-    if (argc < 2 || argc > 3 || !strcmp(argv[1], "-h")) {
-        printf("%s", "Usage: \n  -h \t\tPrint this message.\n  -l \t\tList all running processes.\n  -p <pid> \tGet info about process with specified PID.\n");
-        return 0;
-    }
-    else if (!strcmp(argv[1], "-l")) {
-        list_processes();
-    }
-    else if (!strcmp(argv[1], "-p") && argc == 3) {
-        process_info(argv[2]);
-    }
-    else {
-        printf("Wrong input!\n");
-    }
+const map<char, string> dict = {
+        {'a', ".-"},
+        {'b', "-..."},
+        {'c', "-.-."},
+        {'d', "-.."},
+        {'e', "."},
+        {'f', "..-."},
+        {'g', "--."},
+        {'h', "...."},
+        {'i', ".."},
+        {'j', ".---"},
+        {'k', "-.-"},
+        {'l', ".-.."},
+        {'m', "--"},
+        {'n', "-."},
+        {'o', "---"},
+        {'p', ".--."},
+        {'q', "--.-"},
+        {'r', ".-."},
+        {'s', "..."},
+        {'t', "-"},
+        {'u', "..-"},
+        {'v', "...-"},
+        {'w', ".--"},
+        {'x', "-..-"},
+        {'y', "-.--"},
+         {'z', "--.."}
+};
 
+string to_morse(string s){
+    string ans;
+    for (int i = 0; i < s.size(); i++){
+        if ((s[i] >= 'A' && s[i] <= 'Z') || (s[i]>='a' && s[i]<='z')){
+            ans += dict.at(tolower(s[i])) + '/';
+        }
+        else ans += s[i];
+    }
+    return ans;
+}
+
+int main() {
+    string s;
+    cout << "Enter string: ";
+    cin >> s;
+    cout << "Morse string: " << to_morse(s) << endl;
     return 0;
 }
